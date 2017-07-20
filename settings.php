@@ -23,4 +23,12 @@ if ($ADMIN) {
     $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
     $settings->add($setting);
 
+    // Error Message
+    $name = 'local_forcecpf/errormessage';
+    $title = get_string('errormessage', 'local_forcecpf');
+    $description = get_string('errormessagedesc', 'local_forcecpf');
+    $default = '';
+    $setting = new admin_setting_confightmleditor($name, $title, $description, $default);
+    $settings->add($setting);
+
 }

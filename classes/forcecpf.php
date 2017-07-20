@@ -71,6 +71,9 @@ class forcecpf
         }
 
         if (self::validate_cpf($value)) {
+            if (\core_user::get_user_by_username($value)) {
+                return false;
+            }
             $user = \core_user::get_user($USER->id);
             $user->username = str_replace('-', '', str_replace('.', '', $value));
             require_once($CFG->dirroot . '/user/lib.php');

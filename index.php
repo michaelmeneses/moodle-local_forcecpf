@@ -23,12 +23,18 @@ $PAGE->set_heading($site->shortname);
 
 $form = new local_forcecpf_index_form();
 
+if (get_config('local_forcecpf', 'errormessage')) {
+    $errormessage = get_config('local_forcecpf', 'errormessage');
+} else {
+    $errormessage = get_string('errormessage', 'local_forcecpf');
+}
+
 if ($formdata = $form->get_data()) {
     $forcecpf = new \local_forcecpf\forcecpf();
     if ($forcecpf->update($formdata)) {
         redirect(new moodle_url('/'), get_string('eventuserupdated'), 10);
     } else {
-        redirect(new moodle_url('/local/forcecpf/index.php'), get_string('error', 'moodle'), 10);
+        redirect(new moodle_url('/local/forcecpf/index.php'), $errormessage, 10);
     }
 }
 
