@@ -10,8 +10,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2017072000;
+$plugin->version = 2017072001;
 $plugin->requires = 2016112900.00;
 $plugin->component = 'local_forcecpf';
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = 1.0;
+$plugin->release = 1.1;
