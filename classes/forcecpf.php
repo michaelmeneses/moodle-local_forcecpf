@@ -35,10 +35,11 @@ class forcecpf
             if (self::validate_cpf($USER->idnumber)) {
                 self::update($USER->idnumber);
             } else {
+                $url = new \moodle_url('/local/forcecpf/index.php');
                 if ($PAGE->state)
-                    echo \html_writer::script('window.location.replace("http://localhost/mooc/moodle/local/forcecpf/index.php");');
+                    echo \html_writer::script('window.location.replace("'.$url->out().'");');
                 else
-                    redirect(new \moodle_url('/local/forcecpf/index.php'));
+                    redirect($url);
             }
         }
     }

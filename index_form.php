@@ -17,8 +17,11 @@ class local_forcecpf_index_form extends moodleform {
 
         $mform = $this->_form;
 
-        $mform->addElement('text', 'cpf', html_writer::div(get_string('cpf', 'local_forcecpf')));
+        $mform->addElement('text', 'cpf', get_string('cpf', 'local_forcecpf'), ['maxlength' => 11]);
         $mform->setType('cpf', PARAM_TEXT);
+        $mform->addRule('cpf', get_string('onlynumbers', 'local_forcecpf'), 'minlength', 11, 'client');
+        $mform->addRule('cpf', get_string('onlynumbers', 'local_forcecpf'), 'numeric', null, 'client');
+        $mform->addRule('cpf', get_string('onlynumbers', 'local_forcecpf'), 'nopunctuation', null, 'client');
 
         $this->add_action_buttons(false, get_string('update'));
     }
