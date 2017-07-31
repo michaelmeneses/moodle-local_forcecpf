@@ -31,7 +31,8 @@ class forcecpf
             }
         }
 
-        if (!self::validate_cpf($USER->username)) {
+        $user = \core_user::get_user($USER->id);
+        if (!self::validate_cpf($USER->username) && $USER->username == $user->username) {
             if (self::validate_cpf($USER->idnumber)) {
                 self::update($USER->idnumber);
             } else {
