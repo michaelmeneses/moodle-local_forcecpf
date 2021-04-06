@@ -14,7 +14,7 @@ class forcecpf
 {
     public static function init()
     {
-        global $PAGE, $USER;
+        global $CFG, $PAGE, $USER;
 
         if (!$USER->id) {
             return;
@@ -31,6 +31,16 @@ class forcecpf
             }
         }
 
+        if (!is_siteadmin()) {
+            require_once($CFG->dirroot . '/cohort/lib.php');
+            $cohorts = cohort_get_user_cohorts($USER->id);
+            foreach ($cohorts as $cohort) {
+                if (strpos($cohort->idnumber, 'COORDENACAO-') !== false) {
+                    return;
+                }
+            }
+        }
+
         $user = \core_user::get_user($USER->id);
         if (!self::validate_cpf($USER->username) && $USER->username == $user->username) {
             if (self::validate_cpf($USER->idnumber)) {
@@ -38,7 +48,7 @@ class forcecpf
             } else {
                 $url = new \moodle_url('/local/forcecpf/index.php');
                 if ($PAGE->state)
-                    echo \html_writer::script('window.location.replace("'.$url->out().'");');
+                    echo \html_writer::script('window.location.replace("' . $url->out() . '");');
                 else
                     redirect($url);
             }
