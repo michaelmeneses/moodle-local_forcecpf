@@ -10,7 +10,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-if ($ADMIN) {
+if ($hassiteconfig) {
 
     $settings = new admin_settingpage('local_forcecpf', get_string('pluginname', 'local_forcecpf'));
     $ADMIN->add('localplugins', $settings);
